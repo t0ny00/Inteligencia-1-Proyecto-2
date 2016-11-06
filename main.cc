@@ -5,7 +5,7 @@
 // Modified by: 
 
 #include <iostream>
-#include <limits>
+#include <climits>
 #include "othello_cut.h" // won't work correctly until .h is fixed!
 #include "utils.h"
 
@@ -100,7 +100,7 @@ int main(int argc, const char **argv) {
 
         try {
             if( algorithm == 0 ) {
-                //value = color * (color == 1 ? maxmin(pv[i], 0, use_tt) : minmax(pv[i], 0, use_tt));
+                value = color * (color == 1 ? maxmin(pv[i], 0, use_tt) : minmax(pv[i], 0, use_tt));
             } else if( algorithm == 1 ) {
                 //value = negamax(pv[i], 0, color, use_tt);
             } else if( algorithm == 2 ) {
@@ -130,3 +130,32 @@ int main(int argc, const char **argv) {
     return 0;
 }
 
+int maxmin(state_t state, int depth, bool use_tt){
+    state_t child;
+    if (state.terminal() || depth == 0) return state.value();
+    int score = INT_MAX;
+    for (int i = 0; i < 36; ++i)
+    {
+        if (state.is_black_move(i)){
+            child = state.black_move(i);
+            score = min(score,minmax(child,depth-1));
+        }
+    }
+    return score;
+
+}
+
+int minmax(state_t state, int depth, bool use_tt){
+    state_t child;
+    if (state.terminal() || depth == 0) return state.value();
+    int score = INT_MIN;
+    for (int i = 0; i < DIM; ++i)
+    {
+        if (state.is_white_move(i)){
+            child = state.white_move(i);
+            score = max(score,minmax(child,depth-1));
+        }
+    }
+    return score;
+
+}

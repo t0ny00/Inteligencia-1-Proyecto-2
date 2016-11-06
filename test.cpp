@@ -30,5 +30,8 @@ int main(int argc, const char **argv) {
 	// state = state.move(false, 29);
 	// state.print(cout,1);
 	state.print(cout,1);
+	printf("%d\n",state.terminal() );
+	// state = state.move(false,12);
+	// printf("%d\n",state.value() );
 
 }
