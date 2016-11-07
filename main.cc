@@ -102,7 +102,7 @@ int main(int argc, const char **argv) {
             if( algorithm == 0 ) {
                 value = color * (color == 1 ? maxmin(pv[i], 0, use_tt) : minmax(pv[i], 0, use_tt));
             } else if( algorithm == 1 ) {
-                //value = negamax(pv[i], 0, color, use_tt);
+                value = negamax(pv[i], 0, color, use_tt);
             } else if( algorithm == 2 ) {
                 //value = negamax(pv[i], 0, -200, 200, color, use_tt);
             } else if( algorithm == 3 ) {
@@ -132,13 +132,16 @@ int main(int argc, const char **argv) {
 
 int maxmin(state_t state, int depth, bool use_tt){
     state_t child;
+    //state.print(cout,0);
     if (state.terminal() || depth == 0) return state.value();
-    int score = INT_MAX;
-    for (int i = 0; i < 36; ++i)
+    int score = INT_MIN;
+
+    //iterate over all possible valid moves
+    for (int i = 0; i < DIM; ++i)
     {
         if (state.is_black_move(i)){
             child = state.black_move(i);
-            score = min(score,minmax(child,depth-1));
+            score = max(score,minmax(child,depth-1));
         }
     }
     return score;
@@ -147,15 +150,38 @@ int maxmin(state_t state, int depth, bool use_tt){
 
 int minmax(state_t state, int depth, bool use_tt){
     state_t child;
+    //state.print(cout,0);
     if (state.terminal() || depth == 0) return state.value();
-    int score = INT_MIN;
+    int score = INT_MAX;
+
+    //iterate over all possible valid moves
     for (int i = 0; i < DIM; ++i)
     {
         if (state.is_white_move(i)){
             child = state.white_move(i);
-            score = max(score,minmax(child,depth-1));
+            score = min(score,maxmin(child,depth-1));
         }
     }
     return score;
+
+}
+
+int negamax(state_t state, int depth, int color, bool use_tt){
+    state_t child;
+    bool tmp = false;
+    //state.print(cout,0)
+    tmp = color > 0;
+    if (state.terminal() || depth == 0) return color*state.value();
+    int alpha = INT_MIN;
+
+    //iterate over all possible valid moves
+    for (int i = 0; i < DIM; ++i)
+    {
+        if (state.outflank(tmp,i)){
+            child = state.move(tmp,i);
+            alpha = max(alpha,-negamax(child,depth-1,-color));
+        }
+    }
+    return alpha;
 
 }
