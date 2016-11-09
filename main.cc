@@ -149,9 +149,8 @@ int maxmin(state_t state, int depth, bool use_tt){
         }
     }
     //Player has no possible move, passes the turn to adversary
-    if (pass){
-        score = max(score,minmax(state,depth-1));
-    }
+    if (pass) score = max(score,minmax(state,depth-1));
+    
     expanded++;
     return score;
 
@@ -175,15 +174,19 @@ int minmax(state_t state, int depth, bool use_tt){
         }
     }
     //Player has no possible move, passes the turn to adversary
-    if (pass){
-        score = min(score,maxmin(state,depth-1));
-    }
+    if (pass) score = min(score,maxmin(state,depth-1));
+    
     expanded++;
     return score;
 
 }
 
 int negamax(state_t state, int depth, int color, bool use_tt){
+    /*
+        color = 1 ---> Max node
+        color = 0 ---> Min node
+    */
+
     state_t child;
     bool tmp = false;
     bool pass = true;
@@ -202,9 +205,8 @@ int negamax(state_t state, int depth, int color, bool use_tt){
         }
     }
     //Player has no possible move, passes the turn to adversary
-    if (pass){
-        alpha = max(alpha,-negamax(state,depth-1,-color));
-    }
+    if (pass) alpha = max(alpha,-negamax(state,depth-1,-color));
+
     expanded++;
     return alpha;
 
