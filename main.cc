@@ -102,7 +102,9 @@ int main(int argc, const char **argv) {
             if( algorithm == 0 ) {
                 value = color * (color == 1 ? maxmin(pv[i], 0, use_tt) : minmax(pv[i], 0, use_tt));
             } else if( algorithm == 1 ) {
-                value = negamax(pv[i], 0, color, use_tt);
+                //pv[i].print(cout,0);
+                //printf("%d\n",pv[3].terminal() );
+                value = negamax(pv[i], i, color, use_tt);
             } else if( algorithm == 2 ) {
                 //value = negamax(pv[i], 0, -200, 200, color, use_tt);
             } else if( algorithm == 3 ) {
@@ -115,7 +117,7 @@ int main(int argc, const char **argv) {
             cout << "size TT[1]: size=" << TTable[1].size() << ", #buckets=" << TTable[1].bucket_count() << endl;
             use_tt = false;
         }
-
+        //pv[i].print(cout,0);
         float elapsed_time = Utils::read_time_in_seconds() - start_time;
 
         cout << npv + 1 - i << ". " << (color == 1 ? "Black" : "White") << " moves: "
@@ -132,8 +134,8 @@ int main(int argc, const char **argv) {
 
 int maxmin(state_t state, int depth, bool use_tt){
     state_t child;
-    //state.print(cout,0);
-    if (state.terminal() || depth == 0) return state.value();
+    bool pass = true;
+    if (state.terminal() ) return state.value();
     int score = INT_MIN;
 
     //iterate over all possible valid moves
@@ -141,17 +143,25 @@ int maxmin(state_t state, int depth, bool use_tt){
     {
         if (state.is_black_move(i)){
             child = state.black_move(i);
+            generated++;
             score = max(score,minmax(child,depth-1));
+            pass = false;
         }
     }
+    //Player has no possible move, passes the turn to adversary
+    if (pass){
+        score = max(score,minmax(state,depth-1));
+    }
+    expanded++;
     return score;
 
 }
 
 int minmax(state_t state, int depth, bool use_tt){
     state_t child;
+    bool pass = true;
     //state.print(cout,0);
-    if (state.terminal() || depth == 0) return state.value();
+    if (state.terminal() ) return state.value();
     int score = INT_MAX;
 
     //iterate over all possible valid moves
@@ -159,9 +169,16 @@ int minmax(state_t state, int depth, bool use_tt){
     {
         if (state.is_white_move(i)){
             child = state.white_move(i);
+            generated++;
             score = min(score,maxmin(child,depth-1));
+            pass = false;
         }
     }
+    //Player has no possible move, passes the turn to adversary
+    if (pass){
+        score = min(score,maxmin(state,depth-1));
+    }
+    expanded++;
     return score;
 
 }
@@ -169,9 +186,9 @@ int minmax(state_t state, int depth, bool use_tt){
 int negamax(state_t state, int depth, int color, bool use_tt){
     state_t child;
     bool tmp = false;
-    //state.print(cout,0)
+    bool pass = true;
     tmp = color > 0;
-    if (state.terminal() || depth == 0) return color*state.value();
+    if (state.terminal() ) return color*state.value();
     int alpha = INT_MIN;
 
     //iterate over all possible valid moves
@@ -179,9 +196,16 @@ int negamax(state_t state, int depth, int color, bool use_tt){
     {
         if (state.outflank(tmp,i)){
             child = state.move(tmp,i);
+            generated++;
             alpha = max(alpha,-negamax(child,depth-1,-color));
+            pass = false;
         }
     }
+    //Player has no possible move, passes the turn to adversary
+    if (pass){
+        alpha = max(alpha,-negamax(state,depth-1,-color));
+    }
+    expanded++;
     return alpha;
 
 }
