@@ -103,15 +103,12 @@ int main(int argc, const char **argv) {
             if( algorithm == 0 ) {
                 value = color * (color == 1 ? maxmin(pv[i], 0, use_tt) : minmax(pv[i], 0, use_tt));
             } else if( algorithm == 1 ) {
-                //pv[i].print(cout,0);
-                //printf("%d\n",pv[3].terminal() );
                 value = negamax(pv[i], i, color, use_tt);
             } else if( algorithm == 2 ) {
                 value = negamax(pv[i], 0, -200, 200, color, use_tt);
             } else if( algorithm == 3 ) {
                 value = color*scout(pv[i], 0, color, use_tt);
             } else if( algorithm == 4 ) {
-                //pv[0].print(cout,0);
                 value = negascout(pv[i], i, -200, 200, color, use_tt);
             }
         } catch( const bad_alloc &e ) {
@@ -119,7 +116,6 @@ int main(int argc, const char **argv) {
             cout << "size TT[1]: size=" << TTable[1].size() << ", #buckets=" << TTable[1].bucket_count() << endl;
             use_tt = false;
         }
-        //pv[i].print(cout,0);
         float elapsed_time = Utils::read_time_in_seconds() - start_time;
 
         cout << npv + 1 - i << ". " << (color == 1 ? "Black" : "White") << " moves: "
