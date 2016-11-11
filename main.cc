@@ -88,6 +88,7 @@ int main(int argc, const char **argv) {
 
     // Run algorithm along PV (bacwards)
     cout << "Moving along PV:" << endl;
+    pv[0].print(cout,0);
     for( int i = 0; i <= npv; ++i ) {
         //cout << pv[i];
         int value = 0;
@@ -106,11 +107,12 @@ int main(int argc, const char **argv) {
                 //printf("%d\n",pv[3].terminal() );
                 value = negamax(pv[i], i, color, use_tt);
             } else if( algorithm == 2 ) {
-                //value = negamax(pv[i], 0, -200, 200, color, use_tt);
+                value = negamax(pv[i], 0, -200, 200, color, use_tt);
             } else if( algorithm == 3 ) {
-                //value = scout(pv[i], 0, color, use_tt);
+                value = color*scout(pv[i], 0, color, use_tt);
             } else if( algorithm == 4 ) {
-                //value = negascout(pv[i], 0, -200, 200, color, use_tt);
+                //pv[0].print(cout,0);
+                value = negascout(pv[i], i, -200, 200, color, use_tt);
             }
         } catch( const bad_alloc &e ) {
             cout << "size TT[0]: size=" << TTable[0].size() << ", #buckets=" << TTable[0].bucket_count() << endl;
@@ -184,21 +186,21 @@ int minmax(state_t state, int depth, bool use_tt){
 int negamax(state_t state, int depth, int color, bool use_tt){
     /*
         color = 1 ---> Max node
-        color = 0 ---> Min node
+        color = -1 ---> Min node
     */
 
     state_t child;
-    bool tmp = false;
+    bool is_max = false;
     bool pass = true;
-    tmp = color > 0;
+    is_max = color > 0;
     if (state.terminal() ) return color*state.value();
     int alpha = INT_MIN;
 
     //iterate over all possible valid moves
     for (int i = 0; i < DIM; ++i)
     {
-        if (state.outflank(tmp,i)){
-            child = state.move(tmp,i);
+        if (state.outflank(is_max,i)){
+            child = state.move(is_max,i);
             generated++;
             alpha = max(alpha,-negamax(child,depth-1,-color));
             pass = false;
@@ -207,6 +209,148 @@ int negamax(state_t state, int depth, int color, bool use_tt){
     //Player has no possible move, passes the turn to adversary
     if (pass) alpha = max(alpha,-negamax(state,depth-1,-color));
 
+    expanded++;
+    return alpha;
+
+}
+
+int negamax(state_t state, int depth, int alpha, int beta, int color, bool use_tt){
+    /*
+        color = 1 ---> Max node
+        color = -1 ---> Min node
+    */
+
+    state_t child;
+    bool is_max = false;
+    bool pass = true;
+    is_max = color > 0;
+    if (state.terminal() ) return color*state.value();
+    int score = INT_MIN;
+
+    //iterate over all possible valid moves
+    for (int i = 0; i < DIM; ++i)
+    {
+        if (state.outflank(is_max,i)){
+            child = state.move(is_max,i);
+            generated++;
+            int val = -negamax(child,depth-1,-beta,-alpha,-color);
+            alpha = max(alpha,val);
+            score = max(val,score);
+            pass = false;
+            if (alpha > beta) break;
+        }
+    }
+    //Player has no possible move, passes the turn to adversary
+    if (pass) score = -negamax(state,depth-1,alpha,beta,-color);
+
+    expanded++;
+    return score;
+
+}
+bool TEST(state_t state, int score , bool bigger, int color){
+    
+    state_t child;
+    bool is_max = false;
+    bool pass = true;
+    is_max = color > 0;
+
+    if (state.terminal() ){
+        if(bigger) return (state.value() > score);
+        return (state.value() >= score);
+    } 
+
+    for (int i = 0; i < DIM; ++i)
+    {
+        if (state.outflank(is_max,i)){
+            child = state.move(is_max,i);
+            pass = false;
+            if (is_max && TEST(child,score,bigger,-color)) return true;
+            if (!is_max && !TEST(child,score,bigger,-color)) return false;
+            
+            
+        }
+    }
+    if (pass) return TEST(state,score,bigger,-color);
+    return !is_max;
+}
+
+int scout(state_t state, int depth, int color, bool use_tt){
+    /*
+        color = 1 ---> Max node
+        color = -1 ---> Min node
+    */
+
+    state_t child;
+    bool is_max = false;
+    bool pass = true;
+    bool f_child = true;
+    is_max = color > 0;
+    if (state.terminal() ) return state.value();
+    int score = 0;
+
+    //iterate over all possible valid moves
+    for (int i = 0; i < DIM; ++i)
+    {
+        if (state.outflank(is_max,i)){
+            child = state.move(is_max,i);
+            generated++;
+            pass = false;
+            if (f_child){ 
+                f_child = false;
+                score = scout(child,depth-1,-color);
+            }
+            else{
+                if (is_max && TEST(child,score,true,-color)) score = scout(child,depth-1,-color);
+                if (!is_max && !TEST(child,score,false,-color)) score = scout(child,depth-1,-color);
+            }
+            
+        }
+    }
+    //Player has no possible move, passes the turn to adversary
+    if (pass) score = scout(state,depth-1,-color);
+
+    expanded++;
+    return score;
+}
+
+int negascout(state_t state, int depth, int alpha, int beta, int color, bool use_tt){
+    /*
+        color = 1 ---> Max node
+        color = -1 ---> Min node
+    */
+    state_t child;
+    bool is_max = false;
+    bool pass = true;
+    bool f_child = true;
+    is_max = color > 0;
+    if (state.terminal() ){  return color*state.value(); }
+    int score;
+    //iterate over all possible valid moves
+    for (int i = 0; i < DIM; ++i)
+    {
+        if (state.outflank(is_max,i)){
+            child = state.move(is_max,i);
+            generated++;
+            pass = false;
+            if (f_child){ 
+                f_child = false;
+                score = -negascout(child,depth-1,-beta,-alpha,-color);
+            }
+            else{
+                score = -negascout(child,depth-1,-alpha - 1,-alpha,-color);
+                
+                if(alpha < score && score < beta ){
+                    score = -negascout(child,depth-1,-beta,-score,-color);
+                }
+            }
+            alpha = max(alpha,score);
+            if (alpha >= beta) break;
+        }
+
+    }
+    //Player has no possible move, passes the turn to adversary
+    if (pass) alpha = -negascout(state,depth-1,-beta,-alpha,-color);
+           
     expanded++;
     return alpha;
 
