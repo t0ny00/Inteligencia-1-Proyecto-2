@@ -1,0 +1,20 @@
+Inteligencia Artificial I
+Proyecto #2
+Integrantes
+	-Antonio Scaramazza - 11-10957
+	-Carlos Martínez - 11-10584
+	-Yerson Roa - 11-10876
+
+
+En el proyecto #02 se nos mando a implementar y evaluar a los algoritmos de inteligencia vistos en clase para la versión reducida del juego de otelo.
+
+En la corrida de dichos algoritmos se pudieron observar los nodos expandidos, los generados, el tiempo en segundos en arrojar el valor óptimo para cada recursión y la cantidad de nodos generados por segundo. 
+Cada algoritmo fue corrido con tiempo límite de 10 minutos y se pueden encontrar en los archivos de salida de nombre [Nombre del Algoritmo]-out.txt
+
+Observando la salida de los algoritmos Minmax y Negamax se puede apreciar que el comportamiento es similar, esto debido a que los algoritmos son similares, solo que Minmax hace una recursión entre dos funciones que se llaman entre sí, mientras negamax esta en una sola función que se llama recursivamente.
+
+Luego se observa el comportamiendo de Negamax Alpha Beta que es similar el Minmax pero con poda de hijos, lo cual hace que revise menos ramas y por lo tanto genera menos nodos, con lo cual se logra que el algoritmo sea más rapido y que con el tiempo límite que se estableció en la corrida revisó más niveles.
+
+Al correr los últimos dos algoritmos, se observa el comportamiento de los algoritmos Scout y Negascout, que funcionan bastante similar con la diferencia de que Negascout es más eficiente por lo que logra revisar más niveles en menor cantidad de tiempo pero con la diferencia de que Negascout expande más nodos que el Scout solo que el Negascout genera menos cantidad de nodos que el scout al nivel 12 pero si mayor cantidad de nodos por segundo.
+
+En conclusión se puede destacar que entre los algoritmos más rapidos estan el scout y el negascout, la diferencia mas destacable cae en la cantidad de memoria que guardan en una computadora. Para los primeros algoritmos el maxmin y negamax la diferencia mas notable cae en el tiempo (si bien no es mucho) y la cantidad de nodos generados por segundo que el negamax queda por encima del maxmin. 

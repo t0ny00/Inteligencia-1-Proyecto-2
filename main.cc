@@ -259,14 +259,18 @@ bool TEST(state_t state, int score , bool bigger, int color){
     {
         if (state.outflank(is_max,i)){
             child = state.move(is_max,i);
+            generated++;
             pass = false;
             if (is_max && TEST(child,score,bigger,-color)) return true;
             if (!is_max && !TEST(child,score,bigger,-color)) return false;
-            
-            
         }
     }
-    if (pass) return TEST(state,score,bigger,-color);
+    if (pass){
+        expanded++; 
+        return TEST(state,score,bigger,-color);
+    }
+
+    expanded++;
     return !is_max;
 }
 
