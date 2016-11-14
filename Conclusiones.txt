@@ -6,17 +6,15 @@ Integrantes
 	-Yerson Roa - 11-10876
 
 
-En el proyecto #02 se nos mando a implementar y evaluar a los algoritmos de inteligencia vistos en clase para la versión reducida del juego de otelo.
+En el proyecto #02 se nos mandó a implementar y evaluar a los algoritmos de inteligencia vistos en clase para la versión reducida del juego de Otelo.
 
 En la corrida de dichos algoritmos se pudieron observar los nodos expandidos, los generados, el tiempo en segundos en arrojar el valor óptimo para cada recursión y la cantidad de nodos generados por segundo. 
-Cada algoritmo fue corrido con tiempo límite de 10 minutos y se pueden encontrar en los archivos de salida de nombre [Nombre del Algoritmo]-out.txt
+Cada algoritmo fue corrido con tiempo límite de 10 minutos y los resultados se pueden ver en el archivo Resultados.csv
 
-Observando la salida de los algoritmos Minmax y Negamax se puede apreciar que los resultados son identicos, esto es debido a que los algoritmos son similares, solo que Minmax hace una recursión entre dos funciones que se llaman entre sí, mientras negamax esta en una sola función que se llama recursivamente.
+Observando la salida de los algoritmos Minmax y Negamax se puede apreciar que los resultados son idénticos, esto es debido a que los algoritmos son similares, solo que Minmax hace una recursión entre dos funciones que se llaman entre sí, mientras Negamax está en una sola función que se llama recursivamente.
 
-Luego se observa el comportamiendo de Negamax Alpha Beta que es similar a Negamax pero con poda de hijos, lo cual hace que revise menos ramas y por lo tanto genera menos nodos, con lo cual se logra que el algoritmo sea más rapido y que con el tiempo límite que se estableció en la corrida revise más niveles. Como ejemplo del impacto que posee la impletacion de la poda alpha-beta solo basta comparar los mas de 700 millones de nodos generados para la profundidad 18 de Negamax contra los apenas 2 millones que genero Negamax-Alpha/Beta antes de llegar al mismo resultado. 
+Luego se observa el comportamiento de Negamax Alpha Beta que es similar a Negamax pero con poda de hijos, lo cual hace que revise menos ramas y por lo tanto genera menos nodos, con lo cual se logra que el algoritmo sea más rápido y que con el tiempo límite que se estableció en la corrida revise más niveles. Como ejemplo del impacto que posee la impletación de la poda alpha-beta solo basta comparar los más de 700 millones de nodos generados para la profundidad 18 de Negamax contra los apenas 2 millones que genero Negamax-Alpha/Beta antes de llegar al mismo resultado. 
 
-Los ultimos dos algoritmos, Scout y Negascout, llegaron ambos hasta la profundidad 12 en el tiempo establecido con la diferencia de que Negascout fue sustancialmente mas rapido con cada iteracion comparado con Scout, lo que lleva a concluir que mientras mayor sea la profundidad de busqueda, mayor ventaja tendra Negascout. Tambien podemos resaltar la diferencia entre la cantidad de nodos expandidos y generados entre ambos, dado que Scout genero aproximadamente 14% mas nodos, pero tuvo que expandir 50% menos nodos en comparacion con Negascout.
+Los últimos dos algoritmos, Scout y Negascout, llegaron ambos hasta la profundidad 12 en el tiempo establecido con la diferencia de que Negascout fue sustancialmente más rápido con cada iteración comparado con Scout, lo que lleva a concluir que mientras mayor sea la profundidad de búsqueda, mayor ventaja tendrá Negascout. También podemos resaltar la diferencia entre la cantidad de nodos expandidos y generados entre ambos, dado que Scout genero aproximadamente 14% más nodos, pero tuvo que expandir 50% menos nodos en comparación con Negascout.
 
-En conclusión se puede destacar que entre los algoritmos más rapidos estan el scout y el negascout, la diferencia mas destacable cae en la cantidad de memoria que guardan en una computadora. Para los primeros algoritmos el maxmin y negamax la diferencia mas notable cae en el tiempo (si bien no es mucho) y la cantidad de nodos generados por segundo que el negamax queda por encima del maxmin. 
-
-En conclusion se puede destacar a Negascout como el algoritmo mas rapido entre los implementados, seguido despues por Scout y Negamax-Alpha/Beta. Tambien pudimos notar la poca diferencia entre las implementaciones de Minmax y Negamax Simple, la cual se reduce a la refactorizacion del primero en una unica funcion. 
+En conclusión se puede destacar a Negascout como el algoritmo más rápido entre los implementados, seguido después por Scout y Negamax-Alpha/Beta. También pudimos notar la poca diferencia entre las implementaciones de Minmax y Negamax Simple, la cual se reduce a la refactorización del primero en una única función.
