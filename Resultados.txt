@@ -1,0 +1,126 @@
+
+Algoritmo Maxmin (10 minutos)
+
+
+Depth, Player, Value, Nodes Expanded, Nodes Generated, Seconds, Generated/Seconds
+34, White moves, -4, 0, 0, 0, -nan
+33, Black moves, -4, 1, 1, 0, inf
+32, White moves, -4, 3, 4, 0, inf
+31, Black moves, -4, 4, 4, 0, inf
+30, White moves, -4, 9, 11, 0, inf
+29, Black moves, -4, 10, 12, 0, inf
+28, White moves, -4, 64, 84, 0, inf
+27, Black moves, -4, 125, 162, 0, inf
+26, White moves, -4, 744, 934, 0.004, 233500
+25, Black moves, -4, 3168, 4030, 0.004, 1.0075e+06
+24, White moves, -4, 8597, 10475, 0.012, 872917
+23, Black moves, -4, 55127, 66687, 0.044, 1.51561e+06
+22, White moves, -4, 308479, 377424, 0.196, 1.92563e+06
+21, Black moves, -4, 2525249, 3015556, 1.632, 1.84777e+06
+20, White moves, -4, 9459570, 11321961, 6.12, 1.84999e+06
+19, Black moves, -4, 65121519, 78915639, 42.124, 1.87341e+06
+18, White moves, -4, 625084814, 767689687, 402.02, 1.90958e+06
+
+Algoritmo Negamax (10 minutos)
+
+
+Depth, Player, Value, N Expanded, N Generated, Seconds, Generated/Seconds
+34, White moves, -4, 0, 0, 0, -nan
+33, Black moves, -4, 1, 1, 0, inf
+32, White moves, -4, 3, 4, 0, inf
+31, Black moves, -4, 4, 4, 0, inf
+30, White moves, -4, 9, 11, 0, inf
+29, Black moves, -4, 10, 12, 0, inf
+28, White moves, -4, 64, 84, 0, inf
+27, Black moves, -4, 125, 162, 0, inf
+26, White moves, -4, 744, 934, 0, inf
+25, Black moves, -4, 3168, 4030, 0.004, 1.0075e+06
+24, White moves, -4, 8597, 10475, 0.012, 872917
+23, Black moves, -4, 55127, 66687, 0.056, 1.19084e+06
+22, White moves, -4, 308479, 377424, 0.204, 1.85012e+06
+21, Black moves, -4, 2525249, 3015556, 1.588, 1.89896e+06
+20, White moves, -4, 9459570, 11321961, 5.904, 1.91768e+06
+19, Black moves, -4, 65121519, 78915639, 40.248, 1.96073e+06
+18, White moves, -4, 625084814, 767689687, 390.74, 1.96471e+06
+
+Algoritmo Negamax-Alpha/Beta Pruning (10 minutos)
+
+
+Depth, Player, Value, N Expanded, N Generated, Seconds, Generated/Seconds
+34, White moves, -4, 0, 0, 0, -nan
+33, Black moves, -4, 1, 1, 0, inf
+32, White moves, -4, 3, 4, 0, inf
+31, Black moves, -4, 4, 4, 0, inf
+30, White moves, -4, 9, 11, 0, inf
+29, Black moves, -4, 10, 12, 0, inf
+28, White moves, -4, 25, 29, 0, inf
+27, Black moves, -4, 72, 88, 0, inf
+26, White moves, -4, 212, 246, 0, inf
+25, Black moves, -4, 920, 1086, 0, inf
+24, White moves, -4, 1340, 1569, 0, inf
+23, Black moves, -4, 4108, 4680, 0.004, 1.17e+06
+22, White moves, -4, 9255, 10667, 0.012, 888917
+21, Black moves, -4, 106466, 122695, 0.092, 1.33364e+06
+20, White moves, -4, 126276, 145912, 0.088, 1.65809e+06
+19, Black moves, -4, 259961, 299005, 0.176, 1.69889e+06
+18, White moves, -4, 1668274, 1971626, 1.176, 1.67655e+06
+17, Black moves, -4, 2772094, 3271542, 1.908, 1.71464e+06
+16, White moves, -4, 42947296, 51190890, 28.296, 1.80912e+06
+15, Black moves, -4, 138567853, 168982374, 91.42, 1.84842e+06
+14, White moves, -4, 219690571, 265959906, 145.02, 1.83395e+06
+
+Algoritmo Scout (10 minutos)
+
+
+Depth, Player, Value, N Expanded, N Generated, Seconds, Generated/Seconds
+34, White moves, -4, 0, 0, 0, -nan
+33, Black moves, -4, 1, 1, 0, inf
+32, White moves, -4, 2, 4, 0, inf
+31, Black moves, -4, 3, 4, 0, inf
+30, White moves, -4, 11, 15, 0, inf
+29, Black moves, -4, 12, 16, 0, inf
+28, White moves, -4, 18, 27, 0, inf
+27, Black moves, -4, 36, 73, 0, inf
+26, White moves, -4, 174, 343, 0, inf
+25, Black moves, -4, 703, 1548, 0, inf
+24, White moves, -4, 1083, 2302, 0, inf
+23, Black moves, -4, 1670, 3650, 0, inf
+22, White moves, -4, 5432, 11601, 0.008, 1.45012e+06
+21, Black moves, -4, 21027, 48013, 0.028, 1.71475e+06
+20, White moves, -4, 34239, 78294, 0.056, 1.39811e+06
+19, Black moves, -4, 84158, 178362, 0.1, 1.78362e+06
+18, White moves, -4, 249428, 573183, 0.32, 1.7912e+06
+17, Black moves, -4, 474787, 1049780, 0.564, 1.86131e+06
+16, White moves, -4, 2800620, 7198650, 3.836, 1.8766e+06
+15, Black moves, -4, 11161248, 27913174, 14.812, 1.8845e+06
+14, White moves, -4, 25994166, 67478633, 35.224, 1.9157e+06
+13, Black moves, -4, 93927881, 252021206, 127.04, 1.98379e+06
+12, White moves, -4, 243421170, 645683085, 336.236, 1.92033e+06
+
+Algoritmo Negascout (10 minutos)
+
+
+Depth, Player, Value, N Expanded, N Generated, Seconds, Generated/Seconds
+34, White moves, -4, 0, 0, 0, -nan
+33, Black moves, -4, 1, 1, 0, inf
+32, White moves, -4, 3, 4, 0, inf
+31, Black moves, -4, 4, 4, 0, inf
+30, White moves, -4, 14, 15, 0, inf
+29, Black moves, -4, 15, 16, 0, inf
+28, White moves, -4, 26, 27, 0, inf
+27, Black moves, -4, 64, 73, 0, inf
+26, White moves, -4, 312, 341, 0, inf
+25, Black moves, -4, 1275, 1481, 0.004, 370250
+24, White moves, -4, 1894, 2176, 0, inf
+23, Black moves, -4, 3051, 3451, 0.004, 862750
+22, White moves, -4, 9316, 10604, 0.012, 883667
+21, Black moves, -4, 37959, 43134, 0.04, 1.07835e+06
+20, White moves, -4, 63522, 72267, 0.052, 1.38975e+06
+19, Black moves, -4, 142545, 161808, 0.092, 1.75878e+06
+18, White moves, -4, 466053, 537218, 0.26, 2.06622e+06
+17, Black moves, -4, 869928, 1003078, 0.484, 2.07248e+06
+16, White moves, -4, 5517551, 6523174, 3.036, 2.14861e+06
+15, Black moves, -4, 19704698, 23385092, 10.808, 2.16368e+06
+14, White moves, -4, 47600175, 56338645, 25.608, 2.20004e+06
+13, Black moves, -4, 185296093, 221377402, 97.432, 2.27212e+06
+12, White moves, -4, 477000927, 565087412, 252.2, 2.24063e+06

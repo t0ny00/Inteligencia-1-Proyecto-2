@@ -88,7 +88,6 @@ int main(int argc, const char **argv) {
 
     // Run algorithm along PV (bacwards)
     cout << "Moving along PV:" << endl;
-    pv[0].print(cout,0);
     for( int i = 0; i <= npv; ++i ) {
         //cout << pv[i];
         int value = 0;
