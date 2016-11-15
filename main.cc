@@ -156,7 +156,6 @@ int maxmin(state_t state, int depth, bool use_tt){
 int minmax(state_t state, int depth, bool use_tt){
     state_t child;
     bool pass = true;
-    //state.print(cout,0);
     if (state.terminal() ) return state.value();
     int score = INT_MAX;
 
